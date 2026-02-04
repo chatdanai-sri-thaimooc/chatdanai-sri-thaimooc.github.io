@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of Atom & Pond</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Montserrat:wght@300;400;500&family=Noto+Sans+Thai:wght@300;400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2c2c2c;      /* สีเทาเข้มเกือบดำ (ตัวหนังสือหลัก) */
+            --gold: #bd9b6a;         /* สีทองหรูหรา */
+            --bg: #f9f8f6;           /* สีขาวนวล (Warm White) */
+            --white: #ffffff;
+            
+            --font-head: 'Bodoni Moda', serif;
+            --font-body: 'Montserrat', 'Noto Sans Thai', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: #e6e6e6; /* พื้นหลังข้างนอกสุด */
+            color: var(--primary);
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* จำลองหน้าจอมือถือ */
+        .mobile-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: var(--bg);
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1606109968840-a3a5a73e3518?q=80&w=1974&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 10;
+            color: var(--white);
+            padding: 20px;
+        }
+
+        .pre-title {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .main-title {
+            font-family: var(--font-head);
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .hero-date {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            border-top: 1px solid rgba(255,255,255,0.5);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 80px 30px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: var(--font-head);
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .sub-title {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        p { margin-bottom: 20px; font-size: 0.95rem; }
+
+        /* --- IMAGES --- */
+        .photo-frame {
+            margin: 40px -30px; /* ยืดรูปเต็มขอบ */
+        }
+        .photo-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- COUNTDOWN --- */
+        .countdown-box {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .cd-item {
+            text-align: center;
+            min-width: 60px;
+        }
+        .cd-num {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            color: var(--gold);
+            display: block;
+            line-height: 1;
+        }
+        .cd-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+        }
+
+        /* --- TIMELINE --- */
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+            border-left: 1px solid #ddd;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 5px;
+            width: 7px;
+            height: 7px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+        .time {
+            font-family: var(--font-head);
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+        .event-name {
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin: 5px 0;
+        }
+        .event-desc {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            border: 1px solid var(--primary);
+        }
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+        .btn-gold {
+            background-color: var(--gold);
+            border-color: var(--gold);
+        }
+        .btn-gold:hover {
+            color: var(--gold);
+        }
+
+        /* --- GALLERY GRID --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            filter: grayscale(20%); /* ใส่ฟิลเตอร์ให้ดูคลาสสิก */
+            transition: 0.5s;
+        }
+        .gallery img:hover {
+            filter: grayscale(0%);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .hashtag {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        /* Floating Music (Simulated) */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            z-index: 100;
+            color: var(--gold);
+        }
+        .music-btn.playing i {
+            animation: spin 3s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+
+    <div class="mobile-container">
+        
+        <!-- Music Button (Demo Icon) -->
+        <div class="music-btn playing" onclick="this.classList.toggle('playing')">
+            <i class="fas fa-compact-disc fa-lg"></i>
+        </div>
+
+        <!-- 1. Hero / Cover -->
+        <header class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-text reveal">
+                <p class="pre-title">Save The Date</p>
+                <h1 class="main-title">Atom<br>&<br>Pond</h1>
+                <div class="hero-date">
+                    25 . 12 . 2024
+                </div>
+            </div>
+            <div style="position: absolute; bottom: 30px; left: 0; width: 100%; color: white; opacity: 0.7;">
+                <i class="fas fa-chevron-down fade-down-anim"></i>
+            </div>
+        </header>
+
+        <!-- 2. Introduction -->
+        <section class="reveal">
+            <span class="sub-title">We are getting married</span>
+            <h2 class="section-title">Atom & Pond</h2>
+            <p style="margin-top: 20px; color: #666;">
+                "ความรักไม่ใช่เรื่องของการมองตากัน<br>แต่มันคือการมองไปในทิศทางเดียวกัน"
+            </p>
+            <p>
+                ขอเรียนเชิญท่านร่วมเป็นสักขีพยาน<br>ในวันสำคัญของเราสองคน
+            </p>
+        </section>
+
+        <!-- Large Photo Insert -->
+        <div class="photo-frame reveal">
+            <!-- รูปเจ้าสาวเจ้าบ่าว สไตล์ Minimal -->
+            <img src="https://images.unsplash.com/photo-1596356453261-0d265ae2520a?q=80&w=2070&auto=format&fit=crop" alt="Couple Portrait">
+        </div>
+
+        <!-- 3. Details & Countdown -->
+        <section style="background-color: #fff;" class="reveal">
+            <span class="sub-title">The Big Day</span>
+            <div class="section-title">25 December 2024</div>
+            <p>The Grand Hall Hotel, Bangkok</p>
+
+            <div class="countdown-box" id="countdown">
+                <div class="cd-item"><span class="cd-num" id="d">00</span><span class="cd-label">Days</span></div>
+                <div class="cd-item"><span class="cd-num" id="h">00</span><span class="cd-label">Hrs</span></div>
+                <div class="cd-item"><span class="cd-num" id="m">00</span><span class="cd-label">Mins</span></div>
+                <div class="cd-item"><span class="cd-num" id="s">00</span><span class="cd-label">Secs</span></div>
+            </div>
+
+            <a href="#" class="btn btn-gold">Add to Calendar</a>
+        </section>
+
+        <!-- 4. Schedule (Minimal Style) -->
+        <section class="reveal">
+            <h2 class="section-title" style="font-size: 1.8rem;">Wedding Schedule</h2>
+            <span class="sub-title">ลำดับพิธีการ</span>
+            <br><br>
+
+            <div style="max-width: 300px; margin: 0 auto;">
+                <div class="timeline-item">
+                    <div class="time">07:00 AM</div>
+                    <div class="event-name">Khan Makk</div>
+                    <div class="event-desc">พิธีแห่ขันหมาก</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">09:30 AM</div>
+                    <div class="event-name">Water Pouring</div>
+                    <div class="event-desc">พิธีหลั่งน้ำพระพุทธมนต์</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">18:00 PM</div>
+                    <div class="event-name">Wedding Reception</div>
+                    <div class="event-desc">งานเลี้ยงฉลองมงคลสมรส</div>
+                </div>
+                <div class="timeline-item" style="border: none;">
+                    <div class="time">20:00 PM</div>
+                    <div class="event-name">After Party</div>
+                    <div class="event-desc">เฉลิมฉลองกับเพื่อนเจ้าบ่าวเจ้าสาว</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Gallery Grid -->
+        <div class="photo-frame reveal" style="margin-bottom: 0;">
+            <div class="gallery">
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop" alt="Details 1">
+                <img src="https://images.unsplash.com/photo-1532712938310-34cb3958d42d?q=80&w=2040&auto=format&fit=crop" alt="Details 2">
+                <img src="https://images.unsplash.com/photo-1510076857177-7470076d4098?q=80&w=2072&auto=format&fit=crop" alt="Details 3">
+                <img src="https://images.unsplash.com/photo-1520854221256-17451cc330e7?q=80&w=2070&auto=format&fit=crop" alt="Details 4">
+            </div>
+        </div>
+
+        <!-- 6. Map -->
+        <section style="background-color: #fff;" class="reveal">
+            <h2 class="section-title">Location</h2>
+            <p>ณ โรงแรม เดอะ แกรนด์ ฮอลล์ กรุงเทพฯ</p>
+            
+            <!-- Map Embed -->
+            <div style="width: 100%; height: 250px; background: #eee; margin: 20px 0;">
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.641662584179!2d100.5383!3d13.7367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ0JzEyLjEiTiAxMDDCsDMyJzE3LjkiRQ!5e0!3m2!1sen!2sth!4v1634567890123!5m2!1sen!2sth" width="100%" height="100%" style="border:0; filter: grayscale(100%) contrast(1.2);" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <a href="https://goo.gl/maps" target="_blank" class="btn">Google Maps</a>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="hashtag">#AtomPondWedding</div>
+            <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">THANK YOU FOR COMING</p>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Reveal on Scroll Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+
+        // 2. Countdown Timer
+        const weddingDate = new Date("Dec 25, 2024 18:00:00").getTime();
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const gap = weddingDate - now;
+
+            const d = Math.floor(gap / (1000 * 60 * 60 * 24));
+            const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((gap % (1000 * 60)) / 1000);
+
+            document.getElementById("d").innerText = d < 10 ? '0'+d : d;
+            document.getElementById("h").innerText = h < 10 ? '0'+h : h;
+            document.getElementById("m").innerText = m < 10 ? '0'+m : m;
+            document.getElementById("s").innerText = s < 10 ? '0'+s : s;
+
+            if (gap < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "<h3>Happily Ever After</h3>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
